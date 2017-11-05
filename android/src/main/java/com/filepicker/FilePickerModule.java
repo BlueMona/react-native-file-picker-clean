@@ -82,12 +82,14 @@ public class FilePickerModule extends ReactContextBaseJavaModule implements Acti
     @ReactMethod
     public void showFilePicker(final ReadableMap options, final Callback callback) {
         Activity currentActivity = getCurrentActivity();
+        response = Arguments.createMap();
 
         if (!permissionsCheck(currentActivity)) {
+            response.putBoolean("didRequestPermission", true);
+            response.putString("option", "launchFileChooser");
+            callback.invoke(response);
             return;
         }
-
-        response = Arguments.createMap();
 
         if (currentActivity == null) {
             response.putString("error", "can't find current Activity");

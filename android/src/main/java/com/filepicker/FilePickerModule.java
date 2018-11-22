@@ -293,6 +293,8 @@ public class FilePickerModule extends ReactContextBaseJavaModule implements Acti
                 final int column_index = cursor.getColumnIndexOrThrow(column);
                 return cursor.getString(column_index);
             }
+        } catch (Exception e) {
+            Log.e("FilePickerModule", e.getMessage());
         } finally {
             if (cursor != null)
                 cursor.close();
